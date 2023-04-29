@@ -30,7 +30,7 @@ public abstract class Arena {
         this.length = length;
         MAX_RACERS = maxRacers;
         FRICTION = friction;
-        activeRacers = new ArrayList<Racer>();
+        activeRacers = new ArrayList<Racer>(maxRacers);
         completedRacers = new ArrayList<Racer>();
     }
 
@@ -104,6 +104,9 @@ public abstract class Arena {
      */
     public void setActiveRacers(ArrayList<Racer> activeRacers) {
         this.activeRacers = activeRacers;
+    }
+    public void addActiveRacer(Racer racer) {
+        activeRacers.add(racer);
     }
 
     /**

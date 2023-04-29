@@ -1,6 +1,4 @@
 /**
- *
- */
 package utilities;
 
 import factory.RaceBuilder;
@@ -26,6 +24,7 @@ import java.util.ArrayList;
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  */
+/*
 public class Program {
 
     private static Arena arena;
@@ -117,6 +116,7 @@ public class Program {
     /**
      * @param args
      */
+/*
     public static void main(String[] args) {
         Fate.setSeed(477734503); // to get same "random" results every run;
         ////////////////////////////////////////////
