@@ -14,6 +14,7 @@ package utilities;
  */
 public class EnumContainer {
 
+
     public static enum Vision {
         CLOUDS, SUNNY, FOG
     }

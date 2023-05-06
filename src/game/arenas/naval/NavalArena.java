@@ -10,6 +10,8 @@ import utilities.EnumContainer.Body;
 import utilities.EnumContainer.Water;
 import utilities.EnumContainer.WaterSurface;
 
+import java.util.Observable;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  * <p>
@@ -94,5 +96,10 @@ public class NavalArena extends Arena {
             throw new RacerLimitException(super.getMAX_RACERS(), newRacer.getSerialNumber());
         }
         super.getActiveRacers().add(newRacer);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

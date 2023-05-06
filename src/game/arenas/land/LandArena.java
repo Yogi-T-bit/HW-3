@@ -10,6 +10,8 @@ import game.racers.land.Horse;
 import utilities.EnumContainer.Coverage;
 import utilities.EnumContainer.LandSurface;
 
+import java.util.Observable;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -23,10 +25,15 @@ public class LandArena extends Arena {
     final static int DEFAULT_LENGTH = 800;
     Coverage coverage = Coverage.GRASS;
     LandSurface landSurface = LandSurface.FLAT;
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 
     public LandArena() {
         super(DEFAULT_LENGTH, DEFAULT_MAX_RACERS, DEFAULT_FRICTION);
     }
+
 
     /**
      * @param length set the length

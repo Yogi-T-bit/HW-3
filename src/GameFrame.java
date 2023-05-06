@@ -18,16 +18,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import utilities.Point;
 
 import game.racers.naval.SpeedBoat;
 import utilities.EnumContainer;
 import utilities.EnumContainer.Color;
+import utilities.RacerInfoPanel;
 
 public class GameFrame extends JFrame {
     private JPanel GamePanel;
     private JButton startRaceButton;
     private JButton showInfoButton;
     private JComboBox chooseArena;
+    private JFrame infoTable = null;
     private JTextField arenaLengthText;
     private JTextField maxRacerText;
     private JComboBox chooseRacer;
@@ -37,7 +40,6 @@ public class GameFrame extends JFrame {
     private JTextField maxSpeedText;
     private JTextField accelerationText;
     private JButton buildArenaButton;
-    private JLabel Background;
     private JPanel toolBar;
     private Arena arena;
     private int countRacers = 0;
@@ -49,7 +51,8 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        setSize(1170, 700);
+        setSize(1000+ toolBar.getWidth(), 700);
+        GamePanel.setSize(1000, 700);
         setLocationRelativeTo(null);
 
 
@@ -87,7 +90,12 @@ public class GameFrame extends JFrame {
         buildArenaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (changeBackground() && limitLength() && limitRacers()) {
+
+                setSize(Integer.parseInt(arenaLengthText.getText()) + toolBar.getWidth(), 700);
+                GamePanel.setSize(Integer.parseInt(arenaLengthText.getText()), 700);
+                toolBar.setLocation(getWidth()-toolBar.getWidth(),0);
+
+                if (changeBackground(chooseArena.getSelectedItem().toString()) && limitLength() && limitRacers()) {
 
                     switch (chooseArena.getSelectedItem().toString()) {
                         case "AerialArena" ->
@@ -100,8 +108,9 @@ public class GameFrame extends JFrame {
                                 throw new IllegalStateException("Unexpected value: " + chooseArena.getSelectedItem().toString());
                     }
                     countRacers = 0;
-                    setSize(Integer.parseInt(arenaLengthText.getText()) + 170, 700);
-
+                    arena.setLength(GamePanel.getWidth());
+                    Racer.resetCount();
+                    arena.getActiveRacers().clear();
                 }
             }
         });
@@ -134,11 +143,19 @@ public class GameFrame extends JFrame {
                             default ->
                                     throw new IllegalStateException("Unexpected value: " + chooseRacer.getSelectedItem().toString());
                         }
+                        setVisible(true);
+                        GamePanel.add(arena.getActiveRacers().get(countRacers).getImg());
+                        GamePanel.setComponentZOrder(arena.getActiveRacers().get(countRacers).getImg(), 0);
+                        GamePanel.revalidate();
+                        GamePanel.repaint();
+                        arena.getActiveRacers().get(countRacers).setArena(arena);
+                        Point point = new Point((int) arena.getLength(), 0);
+                        arena.getActiveRacers().get(countRacers).setFinish(point);
+
+                        countRacers++;
                     }
 
-                    setVisible(true);
 
-                    countRacers++;
                 }
 
             }
@@ -147,36 +164,83 @@ public class GameFrame extends JFrame {
         startRaceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //     System.out.println(arena.getLength()+","+arena.getMAX_RACERS());
-                   //  for (Racer racers: arena.getActiveRacers()){;
-                      //   add(racers.getImg());
-                //     racers.introduce();
-        //   }
-                ImageIcon icon = new ImageIcon("src/AerialArena.jpg");
-                ImageIcon icon2 = new ImageIcon("src/BicycleBlack.png");
-                JLabel label = new JLabel("", icon, JLabel.CENTER);
-                JLabel label2 = new JLabel("", icon2, JLabel.LEFT);
-                setSize(1000, 1000);
-                getContentPane().add(label);
-                setVisible(true);
-                getContentPane().add(label2);
-                setVisible(true);
+
+                for (Racer racer :arena.getActiveRacers()) {
+                    Thread thread = new Thread(racer);
+                    thread.start();
+                }
 
 
-              }
+                    }
+
+        });
+        showInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                if(arena!=null) {
+//                    RacerInfoPanel racerInfoPanel = new RacerInfoPanel(arena);
+//                    JScrollPane scrollPane = new JScrollPane(racerInfoPanel);
+//                    GamePanel.add(scrollPane); // add the panel to your UI
+//                    scrollPane.setVisible(true);
+//                    scrollPane.repaint();
+//                    Thread updateThread = new Thread(racerInfoPanel); // create a new thread
+//                    updateThread.start(); // start the thread
+//                }
+//                else{
+//                    JOptionPane.showMessageDialog(null, "You must build an arena first!");
+//                }
+
+                if (arena == null || arena.getActiveRacers().size() == 0) {
+                    JOptionPane.showMessageDialog(null, "Please build arena first and add racers!");
+                    return;
+                }
+                RacerInfoPanel racerInfoPanel = new RacerInfoPanel(arena);
+
+
+
+                JTable table = new JTable( racerInfoPanel.getData(),  racerInfoPanel.getDataNames());
+                table.setPreferredScrollableViewportSize(table.getPreferredSize());
+                JScrollPane scrollPane = new JScrollPane(table);
+
+                JPanel tabPan = new JPanel();
+                // tabPan.setLayout(new GridLayout(1,0));
+                tabPan.add(scrollPane);
+                Thread updateThread = new Thread(racerInfoPanel); // create a new thread
+                updateThread.start();
+
+                if (infoTable != null)
+                    infoTable.dispose();
+                infoTable = new JFrame("Racers information");
+                infoTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                infoTable.setContentPane(tabPan);
+                infoTable.pack();
+                infoTable.setVisible(true);
+
+            }
         });
     }
 
 
-    public boolean changeBackground() {
+    public boolean changeBackground(String arena) {
         try {
-            if (chooseArena.getSelectedItem() == "AerialArena") {
-                Background.setIcon(new ImageIcon("icons/AerialArena.jpg"));
-            } else if (chooseArena.getSelectedItem() == "LandArena") {
-                Background.setIcon(new ImageIcon("icons/LandArena.jpg"));
-            } else if (chooseArena.getSelectedItem() == "NavalArena") {
-                Background.setIcon(new ImageIcon("icons/NavalArena.jpg"));
+            ImageIcon imageicon= new ImageIcon("icons/"+arena+".jpg");
+            JLabel background = new JLabel();
+
+            for(Component c : GamePanel.getComponents()) {
+                if((c instanceof JLabel)) {
+                    GamePanel.remove(c);
+                }
             }
+            GamePanel.setLayout(null);
+            background.setBounds(0,0,GamePanel.getWidth(),GamePanel.getHeight());
+            Image image = imageicon.getImage();
+            Image scaledImage = image.getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH);
+            background.setIcon(new ImageIcon(scaledImage));
+            GamePanel.add(background);
+            GamePanel.setPreferredSize(new Dimension(imageicon.getIconWidth(), imageicon.getIconHeight()));
+            GamePanel.revalidate();
+            GamePanel.repaint();
+
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

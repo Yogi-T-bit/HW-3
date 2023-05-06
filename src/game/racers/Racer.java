@@ -8,6 +8,7 @@ import utilities.Point;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
 
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
@@ -15,7 +16,7 @@ import java.awt.*;
  * This class is an abstract class (the father of all the racers)
  * Contain info about the racer
  */
-public abstract class Racer {
+public abstract class Racer extends Observable implements Runnable {
     private static int count = 1;
     private int serialNumber = count;
     private String name;
@@ -32,6 +33,24 @@ public abstract class Racer {
 
     public JLabel getImg() {
         return img;
+    }
+
+    @Override
+    public void run() {
+        while (this.getCurrentLocation().getX() < this.getFinish().getX()) {
+            this.move(this.getCurrentSpeed());
+            currentSpeed= currentSpeed+acceleration;
+            currentLocation.setX(currentLocation.getX() + currentSpeed);
+            img.setLocation((int)currentLocation.getX(),(int)currentLocation.getY());
+            setChanged();
+            notifyObservers(this);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public void setImg(JLabel img) {
@@ -188,6 +207,10 @@ public abstract class Racer {
         return mishap;
     }
 
+    public static void resetCount(){
+        count=1;
+    }
+
     /**
      * @param mishap mishap var
      */
@@ -211,7 +234,7 @@ public abstract class Racer {
         currentSpeed = 0;
         arena = null;
         failureProbability = 0;
-        currentLocation = new Point(0, 0);
+        currentLocation = new Point(0, 33*(getSerialNumber()-1));
         finish = new Point(0, 0);
         mishap = null;
 
@@ -219,7 +242,10 @@ public abstract class Racer {
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
         ImageIcon icon = new ImageIcon("icons/"+className() + str + ".png");
         img = new JLabel("", icon, JLabel.LEFT);
-        img.setMaximumSize(new Dimension(100, 100));
+        img.setBounds(0,33*(getSerialNumber()-1),33,33);
+        Image image = icon.getImage();
+        Image newimg = image.getScaledInstance(33, 33,  java.awt.Image.SCALE_SMOOTH);
+        img.setIcon(new ImageIcon(newimg));
      //   System.out.println(image.toString());
         if (this.getName() == null)
             this.setName(className() + " #" + this.getSerialNumber());
@@ -234,6 +260,11 @@ public abstract class Racer {
         this.arena = arena;
         currentLocation = start;
         this.finish = finish;
+    }
+    public boolean hasFinished(){
+        if(finish.getX()>=currentLocation.getX())
+            return true;
+        return false;
     }
 
 

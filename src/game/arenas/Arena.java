@@ -6,6 +6,7 @@ import game.racers.Racer;
 import utilities.Point;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * This class is an abstract class (the father of all the arenas)
  * That contains the racer array (all the racers in the arena) and more methods that relevant for the race
  */
-public abstract class Arena {
+public abstract class Arena implements Observer {
     ArrayList<Racer> activeRacers;
     ArrayList<Racer> completedRacers;
     final double FRICTION;

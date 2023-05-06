@@ -11,6 +11,8 @@ import utilities.EnumContainer.Vision;
 import utilities.EnumContainer.Weather;
 import utilities.EnumContainer.Wind;
 
+import java.util.Observable;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -26,6 +28,10 @@ public class AerialArena extends Arena {
     private Weather weather = Weather.DRY;
     private Height height = Height.HIGH;
     private Wind wind = Wind.HIGH;
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 
     public AerialArena() {
         super(DEFAULT_LENGTH, DEFAULT_MAX_RACERS, DEFAULT_FRICTION);
