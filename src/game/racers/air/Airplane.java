@@ -4,9 +4,11 @@ import game.racers.Racer;
 import game.racers.Wheeled;
 import utilities.EnumContainer.Color;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
- *
+ * <p>
  * This class extends from racer and implements form air racer witch means he belongs to the air group
  * The class contains some vars that feet's her conditions
  */
@@ -25,11 +27,11 @@ public class Airplane extends Racer implements AirRacer {
     }
 
     /**
-     * @param name name var set by the user
-     * @param maxSpeed max speed var set by the user
+     * @param name         name var set by the user
+     * @param maxSpeed     max speed var set by the user
      * @param acceleration acceleration var set by the user
-     * @param color color var set by the user
-     * @param NumOfWheels num of wheels var set by the user
+     * @param color        color var set by the user
+     * @param NumOfWheels  num of wheels var set by the user
      */
     public Airplane(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels) {
         super(name, maxSpeed, acceleration, color);

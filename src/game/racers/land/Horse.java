@@ -4,6 +4,8 @@ import game.racers.Racer;
 import utilities.EnumContainer.Breed;
 import utilities.EnumContainer.Color;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -45,6 +47,7 @@ public class Horse extends Racer implements LandRacer {
      */
     public Horse(String name, double maxSpeed, double acceleration, Color color) {
         super(name, maxSpeed, acceleration, color);
+
     }
 
     /**

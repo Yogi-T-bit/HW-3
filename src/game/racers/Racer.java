@@ -6,6 +6,9 @@ import utilities.Fate;
 import utilities.Mishap;
 import utilities.Point;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  * <p>
@@ -25,6 +28,16 @@ public abstract class Racer {
     private double failureProbability;
     private Color color;
     private Mishap mishap;
+    private JLabel img;
+
+    public JLabel getImg() {
+        return img;
+    }
+
+    public void setImg(JLabel img) {
+        this.img = img;
+    }
+
 
     /**
      * @return return the current location var
@@ -201,6 +214,13 @@ public abstract class Racer {
         currentLocation = new Point(0, 0);
         finish = new Point(0, 0);
         mishap = null;
+
+        String str = color.toString().toLowerCase();
+        str = str.substring(0, 1).toUpperCase() + str.substring(1);
+        ImageIcon icon = new ImageIcon("icons/"+className() + str + ".png");
+        img = new JLabel("", icon, JLabel.LEFT);
+        img.setMaximumSize(new Dimension(100, 100));
+     //   System.out.println(image.toString());
         if (this.getName() == null)
             this.setName(className() + " #" + this.getSerialNumber());
     }

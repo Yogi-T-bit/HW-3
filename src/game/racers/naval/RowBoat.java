@@ -5,6 +5,8 @@ import utilities.EnumContainer.BoatType;
 import utilities.EnumContainer.Color;
 import utilities.EnumContainer.Team;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -31,6 +33,7 @@ public class RowBoat extends Racer implements NavalRacer {
      */
     public RowBoat(String name, double maxSpeed, double acceleration, Color color) {
         super(name, maxSpeed, acceleration, color);
+
     }
 
     /**

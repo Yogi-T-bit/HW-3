@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="Init HW-2">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utilities/Game.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utilities/GuiExceptions.java" afterDir="false" />
+    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="big update of the GUI with exceptions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/arenas/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/arenas/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/Racer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/Racer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/air/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/air/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/air/Helicopter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/air/Helicopter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Bicycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Bicycle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Horse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/naval/RowBoat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/naval/RowBoat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/naval/SpeedBoat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/naval/SpeedBoat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Game.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Game.form" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,16 +47,18 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Downloads/HW-2/src/utilities&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Downloads/HW-2/src&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Downloads\HW-2\src" />
       <recent name="D:\Downloads\HW-2\src\utilities" />
       <recent name="D:\Downloads\HW-2" />
     </key>
@@ -67,7 +73,9 @@
       <updated>1682586722774</updated>
       <workItem from="1682586723978" duration="351000" />
       <workItem from="1682763957582" duration="134000" />
-      <workItem from="1682764156742" duration="12621000" />
+      <workItem from="1682764156742" duration="13639000" />
+      <workItem from="1682840708379" duration="28331000" />
+      <workItem from="1683364604022" duration="1324000" />
     </task>
     <task id="LOCAL‎-00001" summary="Init HW-2">
       <created>1682586992417</created>
@@ -76,14 +84,52 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682586992417</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="big update of the GUI with exceptions">
+      <created>1682777014755</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682777014755</updated>
+    </task>
+    <task id="LOCAL‎-00003" summary="big update of the GUI with exceptions">
+      <created>1682777037315</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682777037315</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init HW-2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init HW-2" />
+    <MESSAGE value="big update of the GUI with exceptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="big update of the GUI with exceptions" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.intellij.uiDesigner.core.GridLayoutManager" memberName="myHorizontalInfo" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="comp" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

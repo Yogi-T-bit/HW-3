@@ -5,6 +5,8 @@ import game.racers.Wheeled;
 import utilities.EnumContainer.BicycleType;
 import utilities.EnumContainer.Color;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -50,6 +52,7 @@ public class Bicycle extends Racer implements LandRacer {
     public Bicycle(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels) {
         super(name, maxSpeed, acceleration, color);
         wheeled = new Wheeled(NumOfWheels);
+
     }
 
     /**

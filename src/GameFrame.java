@@ -38,17 +38,18 @@ public class GameFrame extends JFrame {
     private JTextField accelerationText;
     private JButton buildArenaButton;
     private JLabel Background;
+    private JPanel toolBar;
     private Arena arena;
     private int countRacers = 0;
 
 
-    public GameFrame() throws IOException {
+    public GameFrame() {
         super("My GUI");
         setContentPane(GamePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        setSize(1000, 1000);
+        setSize(1170, 700);
         setLocationRelativeTo(null);
 
 
@@ -86,43 +87,57 @@ public class GameFrame extends JFrame {
         buildArenaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(changeBackground()&&limitLength()&&limitRacers()) {
+                if (changeBackground() && limitLength() && limitRacers()) {
 
                     switch (chooseArena.getSelectedItem().toString()) {
                         case "AerialArena" ->
                                 arena = new AerialArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
-                        case "LandArena" -> arena = new LandArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
+                        case "LandArena" ->
+                                arena = new LandArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
                         case "NavalArena" ->
                                 arena = new NavalArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
-                        default -> throw new IllegalStateException("Unexpected value: " + chooseArena.getSelectedItem().toString());
+                        default ->
+                                throw new IllegalStateException("Unexpected value: " + chooseArena.getSelectedItem().toString());
                     }
                     countRacers = 0;
+                    setSize(Integer.parseInt(arenaLengthText.getText()) + 170, 700);
+
                 }
             }
         });
         Add_racer_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(checkTypeRacer() &&checkIfArenaExists()&& checkValuesOfRacer()) {
+                if (checkTypeRacer() && checkIfArenaExists() && checkValuesOfRacer()) {
 
                     Color color = Color.valueOf(chooseColor.getSelectedItem().toString().toUpperCase());
 
                     if (countRacers >= Integer.parseInt(maxRacerText.getText())) {
                         JOptionPane.showMessageDialog(null, "You have reached the maximum number of racers!");
-                       // Add_racer_button.setEnabled(false);
-                    }
-                    else {
+                        // Add_racer_button.setEnabled(false);
+                    } else {
                         switch (chooseRacer.getSelectedItem().toString()) {
-                            case "RowBoat" -> arena.addActiveRacer(new RowBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
-                            case "SpeedBoat" -> arena.addActiveRacer(new SpeedBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
-                            case "Airplane" -> arena.addActiveRacer(new Airplane(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 3));// TODO to check
-                            case "Helicopter" -> arena.addActiveRacer(new Helicopter(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
-                            case "Bicycle" -> arena.addActiveRacer(new Bicycle(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 2));
-                            case "Car" -> arena.addActiveRacer(new Car(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 4));
-                            case "Horse" -> arena.addActiveRacer(new Horse(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
-                            default -> throw new IllegalStateException("Unexpected value: " + chooseRacer.getSelectedItem().toString());
+                            case "RowBoat" ->
+                                    arena.addActiveRacer(new RowBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
+                            case "SpeedBoat" ->
+                                    arena.addActiveRacer(new SpeedBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
+                            case "Airplane" ->
+                                    arena.addActiveRacer(new Airplane(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 3));// TODO to check
+                            case "Helicopter" ->
+                                    arena.addActiveRacer(new Helicopter(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
+                            case "Bicycle" ->
+                                    arena.addActiveRacer(new Bicycle(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 2));
+                            case "Car" ->
+                                    arena.addActiveRacer(new Car(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 4));
+                            case "Horse" ->
+                                    arena.addActiveRacer(new Horse(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color));
+                            default ->
+                                    throw new IllegalStateException("Unexpected value: " + chooseRacer.getSelectedItem().toString());
                         }
                     }
+
+                    setVisible(true);
+
                     countRacers++;
                 }
 
@@ -132,11 +147,23 @@ public class GameFrame extends JFrame {
         startRaceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(arena.getLength()+","+arena.getMAX_RACERS());
-                for (Racer racers: arena.getActiveRacers()){
-                    racers.introduce();
-                }
-            }
+                //     System.out.println(arena.getLength()+","+arena.getMAX_RACERS());
+                   //  for (Racer racers: arena.getActiveRacers()){;
+                      //   add(racers.getImg());
+                //     racers.introduce();
+        //   }
+                ImageIcon icon = new ImageIcon("src/AerialArena.jpg");
+                ImageIcon icon2 = new ImageIcon("src/BicycleBlack.png");
+                JLabel label = new JLabel("", icon, JLabel.CENTER);
+                JLabel label2 = new JLabel("", icon2, JLabel.LEFT);
+                setSize(1000, 1000);
+                getContentPane().add(label);
+                setVisible(true);
+                getContentPane().add(label2);
+                setVisible(true);
+
+
+              }
         });
     }
 
@@ -156,6 +183,7 @@ public class GameFrame extends JFrame {
         }
         return true;
     }
+
 
     public boolean limitRacers() {
         try {
@@ -186,12 +214,10 @@ public class GameFrame extends JFrame {
             if (!((chooseRacer.getSelectedItem() == "Airplane" || chooseRacer.getSelectedItem().toString() == "Helicopter"))
                     && chooseArena.getSelectedItem() == "AerialArena") {
                 throw new Exception();
-            }
-            else if (!((chooseRacer.getSelectedItem() == "Car" || chooseRacer.getSelectedItem().toString() == "Bicycle" || chooseRacer.getSelectedItem().toString() == "Horse"))
+            } else if (!((chooseRacer.getSelectedItem() == "Car" || chooseRacer.getSelectedItem().toString() == "Bicycle" || chooseRacer.getSelectedItem().toString() == "Horse"))
                     && chooseArena.getSelectedItem() == "LandArena") {
                 throw new Exception();
-            }
-            else if (!((chooseRacer.getSelectedItem() == "RowBoat" || chooseRacer.getSelectedItem().toString() == "SpeedBoat"))
+            } else if (!((chooseRacer.getSelectedItem() == "RowBoat" || chooseRacer.getSelectedItem().toString() == "SpeedBoat"))
                     && chooseArena.getSelectedItem() == "NavalArena") {
                 throw new Exception();
             }
@@ -227,8 +253,7 @@ public class GameFrame extends JFrame {
         try {
             if (!(Integer.parseInt(maxSpeedText.getText()) >= 0 && Integer.parseInt(maxSpeedText.getText()) <= 100000)) { //TODO: need to ask the teacher about the most max speed possible
                 throw new Exception();
-            }
-            else if (maxSpeedText.getText().isEmpty()) {
+            } else if (maxSpeedText.getText().isEmpty()) {
                 throw new Exception();
 
             }
@@ -239,8 +264,7 @@ public class GameFrame extends JFrame {
         try {
             if (!(Integer.parseInt(accelerationText.getText()) >= 0 && Integer.parseInt(accelerationText.getText()) <= 10000)) { //TODO: need to ask the teacher about the most acceleration possible
                 throw new Exception();
-            }
-            else if (maxSpeedText.getText().isEmpty()) {
+            } else if (maxSpeedText.getText().isEmpty()) {
                 throw new Exception();
             }
         } catch (Exception ex) {
@@ -252,7 +276,8 @@ public class GameFrame extends JFrame {
 
     // todo: to check if there is one user when we start the game!
 
+
     public static void main(String[] args) throws IOException {
-        GameFrame gameframe = new GameFrame();
+        new GameFrame();
     }
 }

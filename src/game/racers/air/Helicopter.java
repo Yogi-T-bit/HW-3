@@ -3,6 +3,8 @@ package game.racers.air;
 import game.racers.Racer;
 import utilities.EnumContainer.Color;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  *
@@ -26,6 +28,7 @@ public class Helicopter extends Racer implements AirRacer {
      */
     public Helicopter(String name, double maxSpeed, double acceleration, Color color) {
         super(name, maxSpeed, acceleration, color);
+
     }
 
     /**

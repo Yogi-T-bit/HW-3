@@ -5,6 +5,8 @@ import game.racers.Wheeled;
 import utilities.EnumContainer.Color;
 import utilities.EnumContainer.Engine;
 
+import javax.swing.*;
+
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216\
  *
@@ -44,6 +46,7 @@ public class Car extends Racer implements LandRacer {
     public Car(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels) {
         super(name, maxSpeed, acceleration, color);
         wheeled = new Wheeled(NumOfWheels);
+
     }
 
     /**
