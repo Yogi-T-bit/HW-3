@@ -6,11 +6,12 @@ import game.racers.Racer;
 import utilities.Point;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Observer;
 
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
- *
+ * <p>
  * This class is an abstract class (the father of all the arenas)
  * That contains the racer array (all the racers in the arena) and more methods that relevant for the race
  */
@@ -23,9 +24,9 @@ public abstract class Arena implements Observer {
     double length;
 
     /**
-     * @param length the length of the arena
+     * @param length    the length of the arena
      * @param maxRacers the max racers can be in the arena
-     * @param friction the friction in the arena
+     * @param friction  the friction in the arena
      */
     public Arena(double length, int maxRacers, double friction) {
         this.length = length;
@@ -38,7 +39,7 @@ public abstract class Arena implements Observer {
     /**
      * @param newRacer racer var chosen by the user
      * @throws RacerLimitException racer limit exception
-     * @throws RacerTypeException racer type exception
+     * @throws RacerTypeException  racer type exception
      */
     public abstract void addRacer(Racer newRacer) throws RacerLimitException, RacerTypeException;
 
@@ -47,12 +48,12 @@ public abstract class Arena implements Observer {
      * This method prepare the race with setting the constructors of points, the every racer point in the race
      */
     public void initRace() {
-        Point start = new Point(0, 0);
-        Point end = new Point(0, length);
-        for (Racer racer : activeRacers) {
-            racer.initRace(this, start, end);
-            racer.setCurrentLocation(start);
-            start.setY(start.getY() + MIN_Y_GAP);
+            Point start = new Point(0, 0);
+            Point end = new Point(0, length);
+            for (Racer racer : activeRacers) {
+                racer.initRace(this, start, end);
+                racer.setCurrentLocation(start);
+                start.setY(start.getY() + MIN_Y_GAP);
         }
     }
 
@@ -74,15 +75,17 @@ public abstract class Arena implements Observer {
             }
         }
     }
+
     /**
      * Checking if the racer finish the race
      */
-    void crossFinishLine(Racer racer) {
-        if (!(racer.getCurrentLocation().getX() == racer.getFinish().getX())) {
+    public void crossFinishLine(Racer racer) {
+        if ((racer.getCurrentLocation().getX() >= racer.getFinish().getX())) {
             completedRacers.add(racer);
             activeRacers.remove(racer);
         }
     }
+
     /**
      * Showing the results of the race
      */
@@ -106,6 +109,7 @@ public abstract class Arena implements Observer {
     public void setActiveRacers(ArrayList<Racer> activeRacers) {
         this.activeRacers = activeRacers;
     }
+
     public void addActiveRacer(Racer racer) {
         activeRacers.add(racer);
     }

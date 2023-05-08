@@ -6,20 +6,30 @@
       <xy x="-6" y="20" width="934" height="714"/>
     </constraints>
     <properties>
-      <background color="-16757817"/>
+      <background color="-9737365"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="4807a" binding="toolBar" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="4807a" binding="toolBar" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="10" bottom="0" right="10"/>
         <constraints>
-          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="2" indent="0" use-parent-layout="false">
             <minimum-size width="170" height="-1"/>
             <preferred-size width="170" height="-1"/>
             <maximum-size width="170" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <doubleBuffered value="true"/>
+          <enabled value="true"/>
+          <focusTraversalPolicyProvider value="false"/>
+          <focusable value="true"/>
+          <inheritsPopupMenu value="false"/>
+          <opaque value="true"/>
+          <requestFocusEnabled value="true"/>
+          <verifyInputWhenFocusTarget value="true"/>
+          <visible value="true"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="86e06" class="javax.swing.JButton" binding="startRaceButton">

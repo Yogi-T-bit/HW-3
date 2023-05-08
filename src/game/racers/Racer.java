@@ -37,18 +37,35 @@ public abstract class Racer extends Observable implements Runnable {
 
     @Override
     public void run() {
-        while (this.getCurrentLocation().getX() < this.getFinish().getX()) {
+        while (this.getCurrentLocation().getX() <= this.getFinish().getX()) {
             this.move(this.getCurrentSpeed());
-            currentSpeed= currentSpeed+acceleration;
-            currentLocation.setX(currentLocation.getX() + currentSpeed);
-            img.setLocation((int)currentLocation.getX(),(int)currentLocation.getY());
-            setChanged();
-            notifyObservers(this);
+            if(maxSpeed>currentSpeed)
+                currentSpeed= currentSpeed+acceleration;
+            if(currentLocation.getX()<finish.getX()) {
+                currentLocation.setX(currentLocation.getX() + currentSpeed * 0.1);
+            }
+            else{
+                currentLocation.setX((finish.getX()));
+            }
+            img.setLocation((int)currentLocation.getX()-img.getWidth()-15,(int)currentLocation.getY());
+
+
+
+//            try {
+//                Thread.sleep(30);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            setChanged();
+            notifyObservers(this);
+
         }
 
     }
@@ -262,7 +279,7 @@ public abstract class Racer extends Observable implements Runnable {
         this.finish = finish;
     }
     public boolean hasFinished(){
-        if(finish.getX()>=currentLocation.getX())
+        if(!(finish.getX()>currentLocation.getX()))
             return true;
         return false;
     }

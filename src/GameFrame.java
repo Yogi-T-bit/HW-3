@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import utilities.Point;
 
 import game.racers.naval.SpeedBoat;
@@ -51,7 +52,7 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        setSize(1000+ toolBar.getWidth(), 700);
+        setSize(1000 + toolBar.getWidth(), 700);
         GamePanel.setSize(1000, 700);
         setLocationRelativeTo(null);
 
@@ -93,7 +94,11 @@ public class GameFrame extends JFrame {
 
                 setSize(Integer.parseInt(arenaLengthText.getText()) + toolBar.getWidth(), 700);
                 GamePanel.setSize(Integer.parseInt(arenaLengthText.getText()), 700);
-                toolBar.setLocation(getWidth()-toolBar.getWidth(),0);
+                //toolBar.
+                //getContentPane().setLayout(new BorderLayout());
+                //getContentPane().add(GamePanel, BorderLayout.CENTER);
+                //add(toolBar, BorderLayout.EAST);
+                toolBar.setLocation(getWidth() - toolBar.getWidth()-15, 0);
 
                 if (changeBackground(chooseArena.getSelectedItem().toString()) && limitLength() && limitRacers()) {
 
@@ -109,6 +114,7 @@ public class GameFrame extends JFrame {
                     }
                     countRacers = 0;
                     arena.setLength(GamePanel.getWidth());
+
                     Racer.resetCount();
                     arena.getActiveRacers().clear();
                 }
@@ -149,63 +155,45 @@ public class GameFrame extends JFrame {
                         GamePanel.revalidate();
                         GamePanel.repaint();
                         arena.getActiveRacers().get(countRacers).setArena(arena);
-                        Point point = new Point((int) arena.getLength(), 0);
-                        arena.getActiveRacers().get(countRacers).setFinish(point);
+                        Point pointImg = new Point(((int) arena.getLength()), 0);
+                        arena.getActiveRacers().get(countRacers).setFinish(pointImg);
 
                         countRacers++;
                     }
+                }
+            }
+        });
 
+        startRaceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                for (Racer racer : arena.getActiveRacers()) {
+                    Thread thread = new Thread(racer);
+                    thread.start();
                 }
 
             }
 
         });
-        startRaceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                for (Racer racer :arena.getActiveRacers()) {
-                    Thread thread = new Thread(racer);
-                    thread.start();
-                }
-
-
-                    }
-
-        });
         showInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(arena!=null) {
-//                    RacerInfoPanel racerInfoPanel = new RacerInfoPanel(arena);
-//                    JScrollPane scrollPane = new JScrollPane(racerInfoPanel);
-//                    GamePanel.add(scrollPane); // add the panel to your UI
-//                    scrollPane.setVisible(true);
-//                    scrollPane.repaint();
-//                    Thread updateThread = new Thread(racerInfoPanel); // create a new thread
-//                    updateThread.start(); // start the thread
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "You must build an arena first!");
-//                }
 
                 if (arena == null || arena.getActiveRacers().size() == 0) {
                     JOptionPane.showMessageDialog(null, "Please build arena first and add racers!");
                     return;
                 }
+
                 RacerInfoPanel racerInfoPanel = new RacerInfoPanel(arena);
 
-
-
-                JTable table = new JTable( racerInfoPanel.getData(),  racerInfoPanel.getDataNames());
+                JTable table = new JTable(racerInfoPanel.getData(), racerInfoPanel.getDataNames());
                 table.setPreferredScrollableViewportSize(table.getPreferredSize());
                 JScrollPane scrollPane = new JScrollPane(table);
 
                 JPanel tabPan = new JPanel();
-                // tabPan.setLayout(new GridLayout(1,0));
                 tabPan.add(scrollPane);
-                Thread updateThread = new Thread(racerInfoPanel); // create a new thread
+                Thread updateThread = new Thread(racerInfoPanel);
                 updateThread.start();
 
                 if (infoTable != null)
@@ -223,16 +211,16 @@ public class GameFrame extends JFrame {
 
     public boolean changeBackground(String arena) {
         try {
-            ImageIcon imageicon= new ImageIcon("icons/"+arena+".jpg");
+            ImageIcon imageicon = new ImageIcon("icons/" + arena + ".jpg");
             JLabel background = new JLabel();
 
-            for(Component c : GamePanel.getComponents()) {
-                if((c instanceof JLabel)) {
+            for (Component c : GamePanel.getComponents()) {
+                if ((c instanceof JLabel)) {
                     GamePanel.remove(c);
                 }
             }
             GamePanel.setLayout(null);
-            background.setBounds(0,0,GamePanel.getWidth(),GamePanel.getHeight());
+            background.setBounds(0, 0, GamePanel.getWidth(), GamePanel.getHeight());
             Image image = imageicon.getImage();
             Image scaledImage = image.getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH);
             background.setIcon(new ImageIcon(scaledImage));
@@ -282,7 +270,9 @@ public class GameFrame extends JFrame {
                     && chooseArena.getSelectedItem() == "LandArena") {
                 throw new Exception();
             } else if (!((chooseRacer.getSelectedItem() == "RowBoat" || chooseRacer.getSelectedItem().toString() == "SpeedBoat"))
-                    && chooseArena.getSelectedItem() == "NavalArena") {
+                    && chooseArena.getSelectedItem(
+
+            ) == "NavalArena") {
                 throw new Exception();
             }
 
@@ -337,8 +327,6 @@ public class GameFrame extends JFrame {
         }
         return true;
     }
-
-    // todo: to check if there is one user when we start the game!
 
 
     public static void main(String[] args) throws IOException {
