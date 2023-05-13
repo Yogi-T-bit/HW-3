@@ -37,36 +37,25 @@ public abstract class Racer extends Observable implements Runnable {
 
     @Override
     public void run() {
-        while (this.getCurrentLocation().getX() <= this.getFinish().getX()) {
+        while (this.getCurrentLocation().getX() < this.getFinish().getX()) {
             this.move(this.getCurrentSpeed());
-            if(maxSpeed>currentSpeed)
-                currentSpeed= currentSpeed+acceleration;
-            if(currentLocation.getX()<finish.getX()) {
-                currentLocation.setX(currentLocation.getX() + currentSpeed * 0.1);
-            }
-            else{
-                currentLocation.setX((finish.getX()));
-            }
-            img.setLocation((int)currentLocation.getX()-img.getWidth()-15,(int)currentLocation.getY());
+
+            Point mypoint = move(1);
+            java.awt.Point point = new java.awt.Point((int)mypoint.getX()-15-img.getWidth(),(int)mypoint.getY());
+            img.setLocation(point);
 
 
-
-//            try {
-//                Thread.sleep(30);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
 
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             setChanged();
             notifyObservers(this);
 
         }
+        this.arena.crossFinishLine(this);
 
     }
 
@@ -242,14 +231,14 @@ public abstract class Racer extends Observable implements Runnable {
      * @param acceleration set the acceleration var
      * @param color set the color var
      */
-    public Racer(String name, double maxSpeed, double acceleration, Color color) {
+    public Racer(String name, double maxSpeed, double acceleration, Color color,Arena arena) {
         count++;
         this.name = name;
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
         this.color = color;
         currentSpeed = 0;
-        arena = null;
+        this.arena = arena;
         failureProbability = 0;
         currentLocation = new Point(0, 33*(getSerialNumber()-1));
         finish = new Point(0, 0);
@@ -318,7 +307,10 @@ public abstract class Racer extends Observable implements Runnable {
         }
 
         Point newPoint = new Point((this.currentLocation.getX() + (1 * this.currentSpeed)), this.currentLocation.getY());
+        if(newPoint.getX()>finish.getX())
+            newPoint.setX(finish.getX());
         this.setCurrentLocation(newPoint);
+
         return newPoint;
     }
 

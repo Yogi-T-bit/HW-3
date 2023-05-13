@@ -1,5 +1,6 @@
 package game.racers.land;
 
+import game.arenas.Arena;
 import game.racers.Racer;
 import utilities.EnumContainer.Breed;
 import utilities.EnumContainer.Color;
@@ -36,7 +37,7 @@ public class Horse extends Racer implements LandRacer {
 
 
     public Horse() {
-        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color);
+        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color,null);
     }
 
     /**
@@ -45,8 +46,9 @@ public class Horse extends Racer implements LandRacer {
      * @param acceleration acceleration var set by the user
      * @param color color var set by the user
      */
-    public Horse(String name, double maxSpeed, double acceleration, Color color) {
-        super(name, maxSpeed, acceleration, color);
+    public Horse(String name, double maxSpeed, double acceleration, Color color, Arena arena) {
+        super(name, maxSpeed, acceleration, color,arena);
+        this.introduce();
 
     }
 

@@ -1,5 +1,6 @@
 package game.racers.air;
 
+import game.arenas.Arena;
 import game.racers.Racer;
 import utilities.EnumContainer.Color;
 
@@ -18,7 +19,7 @@ public class Helicopter extends Racer implements AirRacer {
     static final Color DEFAULT_color = Color.BLUE;
 
     public Helicopter() {
-        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color);
+        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color,null);
     }
     /**
      * @param name name var set by the user
@@ -26,9 +27,9 @@ public class Helicopter extends Racer implements AirRacer {
      * @param acceleration acceleration var set by the user
      * @param color color var set by the user
      */
-    public Helicopter(String name, double maxSpeed, double acceleration, Color color) {
-        super(name, maxSpeed, acceleration, color);
-
+    public Helicopter(String name, double maxSpeed, double acceleration, Color color, Arena arena) {
+        super(name, maxSpeed, acceleration, color,arena);
+        this.introduce();
     }
 
     /**

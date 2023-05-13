@@ -5,6 +5,7 @@ import game.racers.Racer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class RacerInfoPanel extends JFrame implements Runnable {
     private final JTable table= new JTable();
@@ -13,6 +14,12 @@ public class RacerInfoPanel extends JFrame implements Runnable {
     Arena arena;
     String[] DataNames = { "Racer name", "Current speed", "Max speed", "Current X location", "Finished" };
     String[][] Data;
+
+    public ArrayList<Racer> getRacers() {
+        return racers;
+    }
+
+    private ArrayList<Racer> racers = new ArrayList<>();
     public Arena getArena() {
         return arena;
     }
@@ -39,8 +46,11 @@ public class RacerInfoPanel extends JFrame implements Runnable {
 
 
     public RacerInfoPanel(Arena arena) {
+        racers.addAll(arena.getCompletedRacers());
+        racers.addAll(arena.getActiveRacers());
+
         this.arena = arena;
-        Data = new String[arena.getActiveRacers().size()][5];
+        Data = new String[racers.size()][5];
         tableModel = new DefaultTableModel(Data, DataNames);
         JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -53,7 +63,7 @@ public class RacerInfoPanel extends JFrame implements Runnable {
     private void updateLabels() {
         int i = 0;
 
-        for (Racer racer : arena.getActiveRacers()) {
+        for (Racer racer :racers) {
             Data[i][0] = racer.getName();
             Data[i][1] = "" + racer.getCurrentSpeed();
             Data[i][2] = "" + racer.getMaxSpeed();
@@ -64,6 +74,7 @@ public class RacerInfoPanel extends JFrame implements Runnable {
                 Data[i][4] = "No";
             i++;
         }
+
 
         tableModel.setDataVector(Data, DataNames);
 

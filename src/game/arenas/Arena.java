@@ -6,6 +6,7 @@ import game.racers.Racer;
 import utilities.Point;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,7 +36,6 @@ public abstract class Arena implements Observer {
         activeRacers = new ArrayList<Racer>(maxRacers);
         completedRacers = new ArrayList<Racer>();
     }
-
     /**
      * @param newRacer racer var chosen by the user
      * @throws RacerLimitException racer limit exception
@@ -60,6 +60,12 @@ public abstract class Arena implements Observer {
     /**
      * @return Checking if there is active racers (true if there is)
      */
+    public boolean raceIsFinished(){
+        if(activeRacers.isEmpty()&&!completedRacers.isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public boolean hasActiveRacers() {
         return !activeRacers.isEmpty();
     }
@@ -83,6 +89,9 @@ public abstract class Arena implements Observer {
         if ((racer.getCurrentLocation().getX() >= racer.getFinish().getX())) {
             completedRacers.add(racer);
             activeRacers.remove(racer);
+            System.out.println("active:"+activeRacers);
+            System.out.println("completed:"+completedRacers);
+            System.out.println(racer.getName()+" has finish the race");
         }
     }
 

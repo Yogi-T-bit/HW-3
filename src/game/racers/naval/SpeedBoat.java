@@ -1,5 +1,6 @@
 package game.racers.naval;
 
+import game.arenas.Arena;
 import game.racers.Racer;
 import utilities.EnumContainer.BoatType;
 import utilities.EnumContainer.Color;
@@ -22,7 +23,7 @@ public class SpeedBoat extends Racer implements NavalRacer {
     Team team = Team.DOUBLE;
 
     public SpeedBoat() {
-        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color);
+        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color,null);
     }
 
     /**
@@ -31,8 +32,9 @@ public class SpeedBoat extends Racer implements NavalRacer {
      * @param acceleration acceleration by the user choice
      * @param color color var by the user choice
      */
-    public SpeedBoat(String name, double maxSpeed, double acceleration, Color color) {
-        super(name, maxSpeed, acceleration, color);
+    public SpeedBoat(String name, double maxSpeed, double acceleration, Color color, Arena arena) {
+        super(name, maxSpeed, acceleration, color,arena);
+        this.introduce();
 
     }
     /**

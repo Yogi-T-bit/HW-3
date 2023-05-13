@@ -1,5 +1,6 @@
 package game.racers.land;
 
+import game.arenas.Arena;
 import game.racers.Racer;
 import game.racers.Wheeled;
 import utilities.EnumContainer.BicycleType;
@@ -38,7 +39,7 @@ public class Bicycle extends Racer implements LandRacer {
 
 
     public Bicycle() {
-        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color);
+        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color,null);
         wheeled = new Wheeled(DEFAULT_WHEELS);
     }
 
@@ -49,9 +50,10 @@ public class Bicycle extends Racer implements LandRacer {
      * @param color color var set by the user
      * @param NumOfWheels num of wheels var set by the user
      */
-    public Bicycle(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels) {
-        super(name, maxSpeed, acceleration, color);
+    public Bicycle(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels, Arena arena) {
+        super(name, maxSpeed, acceleration, color,arena);
         wheeled = new Wheeled(NumOfWheels);
+        this.introduce();
 
     }
 

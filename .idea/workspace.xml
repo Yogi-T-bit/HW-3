@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;">
+    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="issue fixes of &quot;show info&quot; and etc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/arenas/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/arenas/Arena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/racers/Racer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/Racer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/air/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/air/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/air/Helicopter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/air/Helicopter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Bicycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Bicycle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/land/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/land/Horse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/naval/RowBoat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/naval/RowBoat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/racers/naval/SpeedBoat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/naval/SpeedBoat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utilities/Game.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Game.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utilities/RacerInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/RacerInfoPanel.java" afterDir="false" />
     </list>
@@ -42,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Downloads/or/src",
+    "last_opened_file_path": "D:/Downloads/HW-2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,7 +77,8 @@
       <workItem from="1682763957582" duration="134000" />
       <workItem from="1682764156742" duration="13639000" />
       <workItem from="1682840708379" duration="28331000" />
-      <workItem from="1683364604022" duration="48058000" />
+      <workItem from="1683364604022" duration="49492000" />
+      <workItem from="1683970478499" duration="26806000" />
     </task>
     <task id="LOCAL‎-00001" summary="Init HW-2">
       <created>1682586992417</created>
@@ -107,7 +115,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683393111846</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;">
+      <created>1683539009930</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1683539009930</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;">
+      <created>1683542032546</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1683542032546</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +150,8 @@
     <MESSAGE value="Init HW-2" />
     <MESSAGE value="big update of the GUI with exceptions" />
     <MESSAGE value="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;" />
+    <MESSAGE value="issue fixes of &quot;show info&quot; and etc" />
+    <option name="LAST_COMMIT_MESSAGE" value="issue fixes of &quot;show info&quot; and etc" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

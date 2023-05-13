@@ -1,5 +1,6 @@
 package game.racers.air;
 
+import game.arenas.Arena;
 import game.racers.Racer;
 import game.racers.Wheeled;
 import utilities.EnumContainer.Color;
@@ -22,7 +23,7 @@ public class Airplane extends Racer implements AirRacer {
     Wheeled wheeled;
 
     public Airplane() {
-        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color);
+        super(null, DEFAULT_MAX_SPEED, DEFAULT_ACCELERATION, DEFAULT_color,null);
         wheeled = new Wheeled(DEFAULT_WHEELS);
     }
 
@@ -33,9 +34,10 @@ public class Airplane extends Racer implements AirRacer {
      * @param color        color var set by the user
      * @param NumOfWheels  num of wheels var set by the user
      */
-    public Airplane(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels) {
-        super(name, maxSpeed, acceleration, color);
+    public Airplane(String name, double maxSpeed, double acceleration, Color color, int NumOfWheels, Arena arena) {
+        super(name, maxSpeed, acceleration, color,arena);
         wheeled = new Wheeled(NumOfWheels);
+        this.introduce();
     }
 
     /**
