@@ -13,8 +13,6 @@ package utilities;
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
  */
 public class EnumContainer {
-
-
     public static enum Vision {
         CLOUDS, SUNNY, FOG
     }
@@ -66,7 +64,6 @@ public class EnumContainer {
 
 
     public static enum BoatType {SKULLING, SWEEP}
-
 
 
 }

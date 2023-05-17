@@ -3,12 +3,14 @@ package game.arenas;
 import game.arenas.exceptions.RacerLimitException;
 import game.arenas.exceptions.RacerTypeException;
 import game.racers.Racer;
+import utilities.EnumContainer;
 import utilities.Point;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+
 
 /**
  * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
@@ -36,6 +38,7 @@ public abstract class Arena implements Observer {
         activeRacers = new ArrayList<Racer>(maxRacers);
         completedRacers = new ArrayList<Racer>();
     }
+
     /**
      * @param newRacer racer var chosen by the user
      * @throws RacerLimitException racer limit exception
@@ -48,24 +51,25 @@ public abstract class Arena implements Observer {
      * This method prepare the race with setting the constructors of points, the every racer point in the race
      */
     public void initRace() {
-            Point start = new Point(0, 0);
-            Point end = new Point(0, length);
-            for (Racer racer : activeRacers) {
-                racer.initRace(this, start, end);
-                racer.setCurrentLocation(start);
-                start.setY(start.getY() + MIN_Y_GAP);
+        Point start = new Point(0, 0);
+        Point end = new Point(0, length);
+        for (Racer racer : activeRacers) {
+            racer.initRace(this, start, end);
+            racer.setCurrentLocation(start);
+            start.setY(start.getY() + MIN_Y_GAP);
         }
     }
 
     /**
      * @return Checking if there is active racers (true if there is)
      */
-    public boolean raceIsFinished(){
-        if(activeRacers.isEmpty()&&!completedRacers.isEmpty()){
+    public boolean raceIsFinished() {
+        if (activeRacers.isEmpty() && !completedRacers.isEmpty()) {
             return true;
         }
         return false;
     }
+
     public boolean hasActiveRacers() {
         return !activeRacers.isEmpty();
     }
@@ -87,11 +91,14 @@ public abstract class Arena implements Observer {
      */
     public void crossFinishLine(Racer racer) {
         if ((racer.getCurrentLocation().getX() >= racer.getFinish().getX())) {
-            completedRacers.add(racer);
-            activeRacers.remove(racer);
-            System.out.println("active:"+activeRacers);
-            System.out.println("completed:"+completedRacers);
-            System.out.println(racer.getName()+" has finish the race");
+            synchronized (completedRacers) {
+                completedRacers.add(racer);
+            }
+            synchronized (activeRacers) {
+                activeRacers.remove(racer);
+                racer.getThread().interrupt();
+            }
+            System.out.println(racer.getName() + " has finish the race");
         }
     }
 
@@ -164,5 +171,6 @@ public abstract class Arena implements Observer {
     public void setLength(double length) {
         this.length = length;
     }
+
 
 }

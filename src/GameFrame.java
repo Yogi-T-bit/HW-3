@@ -1,5 +1,3 @@
-
-
 import game.arenas.Arena;
 import game.arenas.air.AerialArena;
 import game.arenas.land.LandArena;
@@ -17,14 +15,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import utilities.Point;
 
 import game.racers.naval.SpeedBoat;
-import utilities.EnumContainer;
 import utilities.EnumContainer.Color;
 import utilities.RacerInfoPanel;
+
+/**
+ * @author: Gil Cohen - 314800558, Yogev Tamir - 203762216
+ */
 
 public class GameFrame extends JFrame {
     private JPanel GamePanel;
@@ -46,6 +46,9 @@ public class GameFrame extends JFrame {
     private int countRacers = 0;
     private boolean isRaceStarted = false;
 
+    /**
+     * Constructor of Game frame
+     */
     public GameFrame() {
         super("Race Game");
         setContentPane(GamePanel);
@@ -55,7 +58,6 @@ public class GameFrame extends JFrame {
         setSize(1000 + toolBar.getWidth(), 731);
         GamePanel.setSize(1000, 700);
         setLocationRelativeTo(null);
-
 
 
         chooseArena.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0), "Choose Arena:"));
@@ -91,6 +93,9 @@ public class GameFrame extends JFrame {
 
 
         buildArenaButton.addActionListener(new ActionListener() {
+            /**
+             * @param e the event to be processed (action performed)
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!isRaceStarted) {
@@ -124,58 +129,73 @@ public class GameFrame extends JFrame {
             }
         });
         Add_racer_button.addActionListener(new ActionListener() {
+            /**
+             * @param e the event to be processed (action performed)
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-                    if (checkTypeRacer() && checkIfArenaExists() && checkValuesOfRacer()) {
-                        if (!isRaceStarted && !arena.raceIsFinished()) {
+                if (checkTypeRacer() && checkIfArenaExists() && checkValuesOfRacer()) {
+                    if (!isRaceStarted && !arena.raceIsFinished()) {
 
-                            Color color = Color.valueOf(chooseColor.getSelectedItem().toString().toUpperCase());
+                        Color color = Color.valueOf(chooseColor.getSelectedItem().toString().toUpperCase());
 
-                            if (countRacers >= Integer.parseInt(maxRacerText.getText())) {
-                                JOptionPane.showMessageDialog(null, "You have reached the maximum number of racers!");
-                                // Add_racer_button.setEnabled(false);
-                            } else {
-                                switch (chooseRacer.getSelectedItem().toString()) {
-                                    case "RowBoat" -> arena.addActiveRacer(new RowBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
-                                    case "SpeedBoat" -> arena.addActiveRacer(new SpeedBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
-                                    case "Airplane" -> arena.addActiveRacer(new Airplane(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 3, arena));
-                                    case "Helicopter" -> arena.addActiveRacer(new Helicopter(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
-                                    case "Bicycle" -> arena.addActiveRacer(new Bicycle(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 2, arena));
-                                    case "Car" -> arena.addActiveRacer(new Car(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 4, arena));
-                                    case "Horse" -> arena.addActiveRacer(new Horse(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
-                                    default -> throw new IllegalStateException("Unexpected value: " + chooseRacer.getSelectedItem().toString());
-                                }
-                                setVisible(true);
-                                GamePanel.add(arena.getActiveRacers().get(countRacers).getImg());
-                                GamePanel.setComponentZOrder(arena.getActiveRacers().get(countRacers).getImg(), 0);
-                                GamePanel.revalidate();
-                                GamePanel.repaint();
-                                Point pointImg = new Point(((int) arena.getLength()), 33 * (arena.getActiveRacers().get(countRacers).getSerialNumber() - 1));
-                                arena.getActiveRacers().get(countRacers).setFinish(pointImg);
-
-                                countRacers++;
+                        if (countRacers >= Integer.parseInt(maxRacerText.getText())) {
+                            JOptionPane.showMessageDialog(null, "You have reached the maximum number of racers!");
+                            // Add_racer_button.setEnabled(false);
+                        } else {
+                            switch (chooseRacer.getSelectedItem().toString()) {
+                                case "RowBoat" ->
+                                        arena.addActiveRacer(new RowBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
+                                case "SpeedBoat" ->
+                                        arena.addActiveRacer(new SpeedBoat(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
+                                case "Airplane" ->
+                                        arena.addActiveRacer(new Airplane(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 3, arena));
+                                case "Helicopter" ->
+                                        arena.addActiveRacer(new Helicopter(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
+                                case "Bicycle" ->
+                                        arena.addActiveRacer(new Bicycle(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 2, arena));
+                                case "Car" ->
+                                        arena.addActiveRacer(new Car(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, 4, arena));
+                                case "Horse" ->
+                                        arena.addActiveRacer(new Horse(racerNameText.getText(), Double.parseDouble(maxSpeedText.getText()), Double.parseDouble(accelerationText.getText()), color, arena));
+                                default ->
+                                        throw new IllegalStateException("Unexpected value: " + chooseRacer.getSelectedItem().toString());
                             }
-                        } else
-                            JOptionPane.showMessageDialog(null, "The race is already running! (wait until the race is over)");
-                    }
+                            setVisible(true);
+                            GamePanel.add(arena.getActiveRacers().get(countRacers).getImg());
+                            GamePanel.setComponentZOrder(arena.getActiveRacers().get(countRacers).getImg(), 0);
+                            GamePanel.revalidate();
+                            GamePanel.repaint();
+                            Point pointImg = new Point(((int) arena.getLength()), 33 * (arena.getActiveRacers().get(countRacers).getSerialNumber() - 1));
+                            arena.getActiveRacers().get(countRacers).setFinish(pointImg);
+
+                            countRacers++;
+                        }
+                    } else
+                        JOptionPane.showMessageDialog(null, "The race is already running! (wait until the race is over)");
+                }
             }
         });
 
 
         startRaceButton.addActionListener(new ActionListener() {
+            /**
+             * @param e the event to be processed (action performed)
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!isRaceStarted) {
-                    if( arena != null && arena.getActiveRacers().size() > 0) {
+                    if (arena != null && arena.getActiveRacers().size() > 0) {
                         isRaceStarted = true;
                         start();
 
                         for (Racer racer : arena.getActiveRacers()) {
                             Thread thread = new Thread(racer);
+                            racer.setThread(thread);
                             thread.setPriority(Thread.MAX_PRIORITY);
                             thread.start();
                         }
-                    }   else
+                    } else
                         JOptionPane.showMessageDialog(null, "Please build arena first and add racers!");
                 } else
                     JOptionPane.showMessageDialog(null, "The race is already running! (wait until the race is over)");
@@ -185,10 +205,13 @@ public class GameFrame extends JFrame {
 
         });
         showInfoButton.addActionListener(new ActionListener() {
+            /**
+             * @param e the event to be processed (action performed)
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (arena == null || (arena.getActiveRacers().size() == 0&& arena.getCompletedRacers().size()==0)) {
+                if (arena == null || (arena.getActiveRacers().size() == 0 && arena.getCompletedRacers().size() == 0)) {
                     JOptionPane.showMessageDialog(null, "Please build arena first and add racers!");
                     return;
                 }
@@ -214,7 +237,7 @@ public class GameFrame extends JFrame {
 
                 int i = 0;
 
-                for (Racer racer :racerInfoPanel.getRacers()) {
+                for (Racer racer : racerInfoPanel.getRacers()) {
                     racerInfoPanel.getData()[i][0] = racer.getName();
                     racerInfoPanel.getData()[i][1] = "" + racer.getCurrentSpeed();
                     racerInfoPanel.getData()[i][2] = "" + racer.getMaxSpeed();
@@ -232,10 +255,17 @@ public class GameFrame extends JFrame {
     }
 
 
-    public void clearRace(){
-        countRacers=0;
-        arena=null;
+    /**
+     * Clear the race (reset)
+     */
+    public void clearRace() {
+        countRacers = 0;
+        arena = null;
     }
+
+    /**
+     * Running the race in thread and update the race to know if his is finished in real time
+     */
     public void start() {
         SwingUtilities.invokeLater(() -> {
         });
@@ -261,6 +291,9 @@ public class GameFrame extends JFrame {
 
     }
 
+    /**
+     * @param arena the arena to be changed
+     */
     public void changeBackground(String arena) {
         try {
             ImageIcon imageicon = new ImageIcon("icons/" + arena + ".jpg");
@@ -287,6 +320,9 @@ public class GameFrame extends JFrame {
     }
 
 
+    /**
+     * @return throw exception if the user entered invalid input values of max racers
+     */
     public boolean limitRacers() {
         try {
             if (!(Integer.parseInt(maxRacerText.getText()) >= 1 && Integer.parseInt(maxRacerText.getText()) <= 20)) {
@@ -299,6 +335,9 @@ public class GameFrame extends JFrame {
         return true;
     }
 
+    /**
+     * @return throw exception if the user entered invalid input values of arena length
+     */
     public boolean limitLength() {
         try {
             if (!(Integer.parseInt(arenaLengthText.getText()) >= 100 && Integer.parseInt(arenaLengthText.getText()) <= 3000)) {
@@ -311,6 +350,9 @@ public class GameFrame extends JFrame {
         return true;
     }
 
+    /**
+     * @return throw exception if the user entered invalid input values of racer type
+     */
     public boolean checkTypeRacer() {
         try { // check if the user entered air arena racer type
             if (!((chooseRacer.getSelectedItem() == "Airplane" || chooseRacer.getSelectedItem().toString() == "Helicopter"))
@@ -320,9 +362,7 @@ public class GameFrame extends JFrame {
                     && chooseArena.getSelectedItem() == "LandArena") {
                 throw new Exception();
             } else if (!((chooseRacer.getSelectedItem() == "RowBoat" || chooseRacer.getSelectedItem().toString() == "SpeedBoat"))
-                    && chooseArena.getSelectedItem(
-
-            ) == "NavalArena") {
+                    && chooseArena.getSelectedItem() == "NavalArena") {
                 throw new Exception();
             }
 
@@ -333,6 +373,9 @@ public class GameFrame extends JFrame {
         return true;
     }
 
+    /**
+     * @return throw exception if the arena is not built
+     */
     public boolean checkIfArenaExists() {
         try {
             if (arena == null) {
@@ -345,6 +388,9 @@ public class GameFrame extends JFrame {
         return true;
     }
 
+    /**
+     * @return throw exception if the user entered invalid input values of racer
+     */
     public boolean checkValuesOfRacer() {
         try {
             if (racerNameText.getText().isEmpty()) {
@@ -382,4 +428,6 @@ public class GameFrame extends JFrame {
     public static void main(String[] args) throws IOException {
         new GameFrame();
     }
+
+
 }

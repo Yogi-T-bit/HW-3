@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class RacerInfoPanel extends JFrame implements Runnable {
-    private final JTable table= new JTable();
+    private final JTable table = new JTable();
 
     private final DefaultTableModel tableModel;
     Arena arena;
-    String[] DataNames = { "Racer name", "Current speed", "Max speed", "Current X location", "Finished" };
+    String[] DataNames = {"Racer name", "Current speed", "Max speed", "Current X location", "Finished"};
     String[][] Data;
 
     public ArrayList<Racer> getRacers() {
@@ -20,22 +20,38 @@ public class RacerInfoPanel extends JFrame implements Runnable {
     }
 
     private ArrayList<Racer> racers = new ArrayList<>();
+
+    /**
+     * @return get the arena
+     */
     public Arena getArena() {
         return arena;
     }
 
+    /**
+     * @param arena the arena to set
+     */
     public void setArena(Arena arena) {
         this.arena = arena;
     }
 
+    /**
+     * @return get the data names
+     */
     public String[] getDataNames() {
         return DataNames;
     }
 
+    /**
+     * @param dataNames the data names to set
+     */
     public void setDataNames(String[] dataNames) {
         DataNames = dataNames;
     }
 
+    /**
+     * @return get the data
+     */
     public String[][] getData() {
         return Data;
     }
@@ -45,6 +61,9 @@ public class RacerInfoPanel extends JFrame implements Runnable {
     }
 
 
+    /**
+     * @param arena the arena to set
+     */
     public RacerInfoPanel(Arena arena) {
         racers.addAll(arena.getCompletedRacers());
         racers.addAll(arena.getActiveRacers());
@@ -60,15 +79,18 @@ public class RacerInfoPanel extends JFrame implements Runnable {
     }
 
 
+    /**
+     * update the labels
+     */
     private void updateLabels() {
         int i = 0;
 
-        for (Racer racer :racers) {
+        for (Racer racer : racers) {
             Data[i][0] = racer.getName();
             Data[i][1] = "" + racer.getCurrentSpeed();
             Data[i][2] = "" + racer.getMaxSpeed();
             Data[i][3] = "" + racer.getCurrentLocation().getX();
-            if(racer.hasFinished())
+            if (racer.hasFinished())
                 Data[i][4] = "Yes";
             else
                 Data[i][4] = "No";

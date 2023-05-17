@@ -115,6 +115,7 @@ public class AerialArena extends Arena {
         if (super.getActiveRacers().size() >= super.getMAX_RACERS()) {
             throw new RacerLimitException(super.getMAX_RACERS(), newRacer.getSerialNumber());
         }
+
         super.getActiveRacers().add(newRacer);
     }
 }

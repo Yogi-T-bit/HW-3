@@ -30,21 +30,29 @@ public abstract class Racer extends Observable implements Runnable {
     private Color color;
     private Mishap mishap;
     private JLabel img;
+    private Thread thread;
 
     public JLabel getImg() {
         return img;
     }
 
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+
     @Override
     public void run() {
+        this.addObserver(arena);
         while (this.getCurrentLocation().getX() < this.getFinish().getX()) {
             this.move(this.getCurrentSpeed());
 
             Point mypoint = move(1);
-            java.awt.Point point = new java.awt.Point((int)mypoint.getX()-15-img.getWidth(),(int)mypoint.getY());
+            java.awt.Point point = new java.awt.Point((int) mypoint.getX() - 15 - img.getWidth(), (int) mypoint.getY());
             img.setLocation(point);
-
-
 
             try {
                 Thread.sleep(100);
@@ -55,7 +63,7 @@ public abstract class Racer extends Observable implements Runnable {
             notifyObservers(this);
 
         }
-        this.arena.crossFinishLine(this);
+        arena.crossFinishLine(this);
 
     }
 
@@ -213,8 +221,8 @@ public abstract class Racer extends Observable implements Runnable {
         return mishap;
     }
 
-    public static void resetCount(){
-        count=1;
+    public static void resetCount() {
+        count = 1;
     }
 
     /**
@@ -226,12 +234,12 @@ public abstract class Racer extends Observable implements Runnable {
 
 
     /**
-     * @param name set the name var
-     * @param maxSpeed set the max speed var
+     * @param name         set the name var
+     * @param maxSpeed     set the max speed var
      * @param acceleration set the acceleration var
-     * @param color set the color var
+     * @param color        set the color var
      */
-    public Racer(String name, double maxSpeed, double acceleration, Color color,Arena arena) {
+    public Racer(String name, double maxSpeed, double acceleration, Color color, Arena arena) {
         count++;
         this.name = name;
         this.maxSpeed = maxSpeed;
@@ -240,26 +248,26 @@ public abstract class Racer extends Observable implements Runnable {
         currentSpeed = 0;
         this.arena = arena;
         failureProbability = 0;
-        currentLocation = new Point(0, 33*(getSerialNumber()-1));
+        currentLocation = new Point(0, 33 * (getSerialNumber() - 1));
         finish = new Point(0, 0);
         mishap = null;
 
         String str = color.toString().toLowerCase();
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
-        ImageIcon icon = new ImageIcon("icons/"+className() + str + ".png");
+        ImageIcon icon = new ImageIcon("icons/" + className() + str + ".png");
         img = new JLabel("", icon, JLabel.LEFT);
-        img.setBounds(0,33*(getSerialNumber()-1),33,33);
+        img.setBounds(0, 33 * (getSerialNumber() - 1), 33, 33);
         Image image = icon.getImage();
-        Image newimg = image.getScaledInstance(33, 33,  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(33, 33, java.awt.Image.SCALE_SMOOTH);
         img.setIcon(new ImageIcon(newimg));
-     //   System.out.println(image.toString());
+        //   System.out.println(image.toString());
         if (this.getName() == null)
             this.setName(className() + " #" + this.getSerialNumber());
     }
 
     /**
-     * @param arena set the arena var
-     * @param start set the current location var
+     * @param arena  set the arena var
+     * @param start  set the current location var
      * @param finish set the finish var
      */
     public void initRace(Arena arena, Point start, Point finish) {
@@ -267,16 +275,16 @@ public abstract class Racer extends Observable implements Runnable {
         currentLocation = start;
         this.finish = finish;
     }
-    public boolean hasFinished(){
-        if(!(finish.getX()>currentLocation.getX()))
+
+    public boolean hasFinished() {
+        if (!(finish.getX() > currentLocation.getX()))
             return true;
         return false;
     }
 
 
     /**
-     *
-     *The method responsible for moving the racer and checking if there is a mishap (stop until there is no mishap)
+     * The method responsible for moving the racer and checking if there is a mishap (stop until there is no mishap)
      *
      * @param friction chosen double var by the user
      * @return return new point
@@ -307,7 +315,7 @@ public abstract class Racer extends Observable implements Runnable {
         }
 
         Point newPoint = new Point((this.currentLocation.getX() + (1 * this.currentSpeed)), this.currentLocation.getY());
-        if(newPoint.getX()>finish.getX())
+        if (newPoint.getX() > finish.getX())
             newPoint.setX(finish.getX());
         this.setCurrentLocation(newPoint);
 
