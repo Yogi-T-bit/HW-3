@@ -45,6 +45,7 @@ public class GameFrame extends JFrame {
     private Arena arena;
     private int countRacers = 0;
     private boolean isRaceStarted = false;
+    private int isArenaBuilt = 0;
 
     /**
      * Constructor of Game frame
@@ -109,12 +110,18 @@ public class GameFrame extends JFrame {
                         changeBackground(chooseArena.getSelectedItem().toString());
 
                         switch (chooseArena.getSelectedItem().toString()) {
-                            case "AerialArena" ->
-                                    arena = new AerialArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
-                            case "LandArena" ->
-                                    arena = new LandArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
-                            case "NavalArena" ->
-                                    arena = new NavalArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
+                            case "AerialArena" -> {
+                                arena = new AerialArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
+                                isArenaBuilt = 1;
+                            }
+                            case "LandArena" -> {
+                                arena = new LandArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
+                                isArenaBuilt = 2;
+                            }
+                            case "NavalArena" -> {
+                                arena = new NavalArena(Double.parseDouble(arenaLengthText.getText()), Integer.parseInt(maxRacerText.getText()));
+                                isArenaBuilt = 3;
+                            }
                             default ->
                                     throw new IllegalStateException("Unexpected value: " + chooseArena.getSelectedItem().toString());
                         }
@@ -356,13 +363,13 @@ public class GameFrame extends JFrame {
     public boolean checkTypeRacer() {
         try { // check if the user entered air arena racer type
             if (!((chooseRacer.getSelectedItem() == "Airplane" || chooseRacer.getSelectedItem().toString() == "Helicopter"))
-                    && chooseArena.getSelectedItem() == "AerialArena") {
+                    && (isArenaBuilt == 1)) {
                 throw new Exception();
             } else if (!((chooseRacer.getSelectedItem() == "Car" || chooseRacer.getSelectedItem().toString() == "Bicycle" || chooseRacer.getSelectedItem().toString() == "Horse"))
-                    && chooseArena.getSelectedItem() == "LandArena") {
+                    && (isArenaBuilt == 2)) {
                 throw new Exception();
             } else if (!((chooseRacer.getSelectedItem() == "RowBoat" || chooseRacer.getSelectedItem().toString() == "SpeedBoat"))
-                    && chooseArena.getSelectedItem() == "NavalArena") {
+                    && (isArenaBuilt == 3)) {
                 throw new Exception();
             }
 

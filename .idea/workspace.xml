@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="issue fixes of &quot;show info&quot; and etc">
+    <list default="true" id="e1f593eb-3742-4193-b8df-4ae0703a4aab" name="Changes" comment="finish project">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/HW-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AirplaneBlack.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/arenas/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/arenas/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/arenas/air/AerialArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/arenas/air/AerialArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/arenas/naval/NavalArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/arenas/naval/NavalArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/racers/Racer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/racers/Racer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/EnumContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/EnumContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/Game.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Game.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/RacerInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/RacerInfoPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +43,7 @@
     "TODO_SCOPE": "All Places",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "322",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Downloads/HW-2",
+    "last_opened_file_path": "D:/Downloads/HW-3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -77,7 +73,8 @@
       <workItem from="1682840708379" duration="28331000" />
       <workItem from="1683364604022" duration="49492000" />
       <workItem from="1683970478499" duration="30467000" />
-      <workItem from="1684319299617" duration="6201000" />
+      <workItem from="1684319299617" duration="8507000" />
+      <workItem from="1685169974203" duration="354000" />
     </task>
     <task id="LOCAL‎-00001" summary="Init HW-2">
       <created>1682586992417</created>
@@ -135,7 +132,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683999506522</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="finish project">
+      <created>1684325680094</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1684325680094</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +161,8 @@
     <MESSAGE value="big update of the GUI with exceptions" />
     <MESSAGE value="big update of the GUI and running &quot;start race&quot; button+ &quot;show info&quot;" />
     <MESSAGE value="issue fixes of &quot;show info&quot; and etc" />
-    <option name="LAST_COMMIT_MESSAGE" value="issue fixes of &quot;show info&quot; and etc" />
+    <MESSAGE value="finish project" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish project" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
